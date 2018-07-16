@@ -35,11 +35,11 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
-		<dependency>
+		<!-- <dependency>
 		   <groupId>org.activiti</groupId>
 		   <artifactId>activiti-spring-boot-starter-basic</artifactId>
 		   <version>6.0.0</version>
-		</dependency>
+		</dependency> -->
 		
 		
 		<!-- Provided -->
@@ -136,6 +136,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- 邮件服务 -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>

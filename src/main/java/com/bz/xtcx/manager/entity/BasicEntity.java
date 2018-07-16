@@ -5,7 +5,7 @@ import java.sql.Date;
 import com.bz.xtcx.manager.enums.StatusEnum;
 
 public class BasicEntity {
-	private int id;
+	private String id;
 	private Date createTime;
 	private String creater = "auto";
 	private String updater;
@@ -37,16 +37,16 @@ public class BasicEntity {
 	public void setUpdater(String updater) {
 		this.updater = updater;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public Date getUpdateTime() {
 		return updateTime;
 	}
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 }
