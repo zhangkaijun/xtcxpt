@@ -2,6 +2,8 @@ package com.bz.xtcx.manager.entity;
 
 import java.util.List;
 
+import com.bz.xtcx.manager.comom.BasicEntity;
+
 public class SysRole extends BasicEntity{
 
 	private String roleName;

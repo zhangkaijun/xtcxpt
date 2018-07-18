@@ -1,4 +1,4 @@
-package com.bz.xtcx.manager.entity;
+package com.bz.xtcx.manager.comom;
 
 import java.sql.Date;
 

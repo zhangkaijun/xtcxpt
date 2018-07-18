@@ -33,7 +33,7 @@ public class EmailServiceTest {
 	public void testRedis() {
 		ValueOperations<String, SysUser> operations = redisTemplate.opsForValue();
 		SysUser user = new SysUser();
-		user.setUsername("test-user");
+		user.setUserName("test-user");
 		boolean hasKey = redisTemplate.hasKey("user1");
 		System.out.println(hasKey);
 		if(hasKey) {
