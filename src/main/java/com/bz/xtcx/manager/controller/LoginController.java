@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bz.xtcx.manager.entity.Userinfo;
+import com.bz.xtcx.manager.entity.SysUser;
 import com.bz.xtcx.manager.service.IEmailService;
 import com.bz.xtcx.manager.service.IUserService;
 import com.bz.xtcx.manager.vo.VoResponse;
@@ -49,9 +49,9 @@ public class LoginController extends BaseController{
 	}
 
 	@PostMapping("register")
-	public Object register(Userinfo user) {
+	public Object register(SysUser user) {
 		VoResponse voRes = new VoResponse();
-		if(StringUtils.isEmpty(user.getUsername())) {
+		if(StringUtils.isEmpty(user.getUserName())) {
 			voRes.setNull(voRes);
 			voRes.setMessage("用户名不能为空");
 			return voRes;

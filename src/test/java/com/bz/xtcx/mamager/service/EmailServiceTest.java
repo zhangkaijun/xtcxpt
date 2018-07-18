@@ -11,7 +11,7 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.bz.xtcx.manager.SampleWarApplication;
-import com.bz.xtcx.manager.entity.Userinfo;
+import com.bz.xtcx.manager.entity.SysUser;
 import com.bz.xtcx.manager.service.IEmailService;
 
 @RunWith(SpringRunner.class)
@@ -19,7 +19,7 @@ import com.bz.xtcx.manager.service.IEmailService;
 public class EmailServiceTest {
 	
 	@Resource
-    private RedisTemplate<String, Userinfo> redisTemplate;
+    private RedisTemplate<String, SysUser> redisTemplate;
 
 	@Autowired
 	private IEmailService emailService;
@@ -31,8 +31,8 @@ public class EmailServiceTest {
 	
 	@Test
 	public void testRedis() {
-		ValueOperations<String, Userinfo> operations = redisTemplate.opsForValue();
-		Userinfo user = new Userinfo();
+		ValueOperations<String, SysUser> operations = redisTemplate.opsForValue();
+		SysUser user = new SysUser();
 		user.setUsername("test-user");
 		boolean hasKey = redisTemplate.hasKey("user1");
 		System.out.println(hasKey);

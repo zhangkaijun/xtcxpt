@@ -2,11 +2,11 @@ package com.bz.xtcx.manager.service;
 
 import java.util.List;
 
-import com.bz.xtcx.manager.entity.Userinfo;
+import com.bz.xtcx.manager.entity.SysUser;
 
 public interface IUserService {
 
-	public List<Userinfo> getUserByEmail(String email);
+	public List<SysUser> getUserByEmail(String email);
 	
-	public void save(Userinfo user);
+	public void save(SysUser user);
 }

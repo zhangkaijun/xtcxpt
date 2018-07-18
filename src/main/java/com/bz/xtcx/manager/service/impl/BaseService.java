@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.bz.xtcx.manager.entity.Userinfo;
+import com.bz.xtcx.manager.entity.SysUser;
 
 
 public class BaseService {
@@ -39,7 +39,7 @@ public class BaseService {
 		session = getSession(request);
 		Object obj = session.getAttribute("");
 		if(obj != null){
-			username = ((Userinfo)obj).getUsername();
+			username = ((SysUser)obj).getUserName();
 		}
 		return username;
 	}
@@ -50,7 +50,7 @@ public class BaseService {
 		String userId = null;
 		//userId = "64365789BCA1ECF1E05013AC0688161E";
 		if(obj != null){
-			userId = ((Userinfo)obj).getId();
+			userId = ((SysUser)obj).getId();
 		}
 		return userId;
 	}
