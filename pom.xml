@@ -7,7 +7,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-samples</artifactId>
 		<version>${revision}</version>
-		<relativePath>../spring-boot-master/spring-boot-samples</relativePath>
+		<relativePath>../../spring-boot-master/spring-boot-samples</relativePath>
 	</parent>
 	<groupId>jsbz</groupId>
 	<artifactId>xtcx</artifactId>
