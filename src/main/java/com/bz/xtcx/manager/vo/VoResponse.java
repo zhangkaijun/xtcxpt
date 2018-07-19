@@ -1,14 +1,21 @@
 package com.bz.xtcx.manager.vo;
 
 public class VoResponse {
+	
 	private Integer code;
 	private Boolean success;
 	private String message;
 	private Object data;
 	
-	public VoResponse(){
+	public VoResponse() {
 		this.setCode(10000);
 		this.setSuccess(Boolean.TRUE);
+	}
+	
+	public VoResponse(Integer code, Boolean success) {
+		super();
+		this.code = code;
+		this.success = success;
 	}
 	
 	public String getMessage() {
@@ -45,5 +52,9 @@ public class VoResponse {
 	public void setFail(VoResponse voRes){
 		voRes.setCode(10002);
 		voRes.setSuccess(false);
+	}
+	public void setSuccess(VoResponse voRes){
+		voRes.setCode(10000);
+		voRes.setSuccess(true);
 	}
 }

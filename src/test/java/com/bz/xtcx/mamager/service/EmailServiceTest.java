@@ -43,6 +43,7 @@ public class EmailServiceTest {
 		}
 		hasKey = redisTemplate.hasKey("user1");
 		System.out.println(hasKey);
+		System.out.println(redisTemplate.opsForValue().size("user1"));
 		
 	}
 }

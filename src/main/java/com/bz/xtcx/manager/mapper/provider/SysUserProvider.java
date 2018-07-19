@@ -4,24 +4,24 @@ import com.bz.xtcx.manager.entity.SysUser;
 
 public class SysUserProvider {
 
-	public String findCount(SysUser sysUser){
+	public String findCount(SysUser user){
         StringBuilder sql = new StringBuilder("select count(*) from `sys_user` where 1=1");
-        sql.append(queryCondition(sysUser));
+        sql.append(queryCondition(user));
         return sql.toString();
     }
 	
-	public String findEntityByPage(SysUser sysUser) {
+	public String findByCondition(SysUser user) {
 		StringBuilder sql = new StringBuilder("select * from `sys_user` where 1=1");
-		sql.append(queryCondition(sysUser));
+		sql.append(queryCondition(user));
         return sql.toString();
 	}
 	
-	StringBuilder queryCondition(SysUser sysUser) {
+	StringBuilder queryCondition(SysUser user) {
 		StringBuilder sql = new StringBuilder();
-		if (sysUser.getUserName() != null)
-            sql.append(" and user_name='"+sysUser.getUserName()+"'");
-        if (sysUser.getCellphone() != null)
-            sql.append(" and cellphone='"+sysUser.getCellphone()+"'");
+		if (user.getUserName() != null)
+            sql.append(" and user_name='"+user.getUserName()+"'");
+        if (user.getCellphone() != null)
+            sql.append(" and cellphone='"+user.getCellphone()+"'");
 		return sql;
 	}
 }

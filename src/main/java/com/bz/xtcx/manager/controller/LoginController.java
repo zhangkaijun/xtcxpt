@@ -1,43 +1,33 @@
-/*
- * Copyright 2012-2016 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.bz.xtcx.manager.controller;
 
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import org.apache.cxf.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.util.DigestUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bz.xtcx.manager.entity.SysUser;
 import com.bz.xtcx.manager.service.IEmailService;
-import com.bz.xtcx.manager.service.IUserService;
+import com.bz.xtcx.manager.service.ISysUserService;
 import com.bz.xtcx.manager.vo.VoResponse;
+import com.bz.xtcx.manager.vo.VoUser;
 
 @RestController
-@RequestMapping("xtcx/login")
+@RequestMapping("xtcx/user")
 public class LoginController extends BaseController{
 	
 	@Autowired
-	private IUserService userService;
+	private ISysUserService sysUserService;
 	
 	@Autowired
 	private IEmailService emailService;
@@ -47,10 +37,22 @@ public class LoginController extends BaseController{
 		String msg = "Hello,LoginController";
 		return msg;
 	}
+	
+	@PostMapping("login")
+	public Object login(@RequestBody VoUser vo) {
+		VoResponse voRes = getVoResponse();
+		if(StringUtils.isEmpty(vo.getUsername()) || StringUtils.isEmpty(vo.getPassword())) return null;
+		if(vo.isAdmin()) {
+			voRes = sysUserService.signIn(vo.getUsername(), vo.getPassword());
+		}else {
+			
+		}
+		return voRes;
+	}
 
 	@PostMapping("register")
 	public Object register(SysUser user) {
-		VoResponse voRes = new VoResponse();
+		VoResponse voRes = getVoResponse();
 		if(StringUtils.isEmpty(user.getUserName())) {
 			voRes.setNull(voRes);
 			voRes.setMessage("用户名不能为空");
@@ -67,7 +69,7 @@ public class LoginController extends BaseController{
 			return voRes;
 		}
 		//检查邮箱是否已经注册
-		if(userService.getUserByEmail(user.getEmail()).size() > 0) {
+		if(sysUserService.getUserByEmail(user.getEmail()).size() > 0) {
 			voRes.setFail(voRes);
 			voRes.setMessage("邮箱已经被注册");
 			return voRes;
@@ -82,16 +84,21 @@ public class LoginController extends BaseController{
 			voRes.setMessage("邮箱验证有误，请重新输入邮箱");
 			return voRes;
 		}
-		HttpSession session = getSession();
+		/*HttpSession session = getSession();
 		session.setAttribute(user.getEmail(), uuid);
-		session.setMaxInactiveInterval(5 * 60 * 1000);
-		userService.save(user);
+		session.setMaxInactiveInterval(5 * 60 * 1000);*/
+		//sysUserService.save(user);
 		return voRes;
 	}
 	
+	
+	
 	public static void main(String[] args) {
 		UUID uuid = UUID.randomUUID();
-        System.out.println(uuid);
+		//对密码进行 md5 加密
+		String password = "123456";
+		String md5Password = DigestUtils.md5DigestAsHex(password.getBytes());
+        System.out.println(md5Password);
 	}
 	
 }

@@ -1,4 +1,4 @@
-package com.bz.xtcx.mamager.service;
+package com.bz.xtcx.mamager.mapper;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class SysUserMapperTest {
 	public void findByPage() {
 		SysUser user = new SysUser();
 		Page<SysUser> page = PageHelper.startPage(1, 3);
-		List<SysUser> list = sysUserMapper.findByPage(user);
+		List<SysUser> list = sysUserMapper.findByCondition(user);
 		PageInfo<SysUser> info = new PageInfo<SysUser>(page);
 		for(SysUser o : list) {
 			System.out.println(o.getUserName());

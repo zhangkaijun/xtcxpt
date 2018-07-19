@@ -1,5 +1,6 @@
 package com.bz.xtcx.manager.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.bz.xtcx.manager.comom.BasicEntity;
@@ -8,13 +9,17 @@ import com.bz.xtcx.manager.comom.BasicEntity;
  * @author zhangkj
  *
  */
-public class SysUser extends BasicEntity{
+public class SysUser extends BasicEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3663121001443304224L;
 	private String userName;
 	private String password;
 	private String email;
 	private String cellphone;
-	private String fullName;
+	private String token;
 	private List<SysRole> roles;
 	
 	public String getPassword() {
@@ -35,12 +40,6 @@ public class SysUser extends BasicEntity{
 	public void setCellphone(String cellphone) {
 		this.cellphone = cellphone;
 	}
-	public String getFullName() {
-		return fullName;
-	}
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
 	public String getUserName() {
 		return userName;
 	}
@@ -52,6 +51,12 @@ public class SysUser extends BasicEntity{
 	}
 	public void setRoles(List<SysRole> roles) {
 		this.roles = roles;
+	}
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
 	}
 	
 }

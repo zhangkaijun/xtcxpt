@@ -2,7 +2,9 @@ package com.bz.xtcx.manager.entity;
 
 import java.util.List;
 
-public class SysOrg {
+import com.bz.xtcx.manager.comom.BasicEntity;
+
+public class SysOrg extends BasicEntity{
 
 	private String orgName;
 	private String orgType;//组织类别

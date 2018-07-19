@@ -1,21 +1,33 @@
 package com.bz.xtcx.manager.service.impl;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import com.bz.xtcx.manager.entity.SysUser;
 
 
 public class BaseService {
+	
+	@Resource
+    private RedisTemplate<String, Object> redisTemplate;
 
 	@Autowired
 	private HttpSession session;
 	
 	@Autowired
 	private HttpServletRequest request;
+	
+	public HttpSession getSession() {
+		return session;
+	}
 
+	public void setSession(HttpSession session) {
+		this.session = session;
+	}
 	
 	public HttpServletRequest getRequest() {
 		return request;
@@ -25,19 +37,30 @@ public class BaseService {
 		this.request = request;
 	}
 	
-	private HttpSession getSession(HttpServletRequest request){
-		String token = request.getHeader("token");
-		//HttpSession session = null;
-		if(token != null) {
-			//session = UserController.sessionMap.get(token);
+	/**
+	 * 创建redis缓存session
+	 * @param username
+	 * @param session
+	 */
+	public void createRedisUser(String username, SysUser user) {
+		if(redisTemplate.opsForValue().getOperations().hasKey(username)) {
+			String token = redisTemplate.opsForValue().get(username).toString();
+			boolean result = redisTemplate.delete(username);
+			System.out.println(result);
+			result = redisTemplate.delete(token);
+			System.out.println(result);
 		}
-		return session;
+		redisTemplate.opsForValue().set(username, session.getId());
+		redisTemplate.opsForValue().set(session.getId(), user);
 	}
-
+	
 	public String getUserName(){
 		String username = "auto";
-		session = getSession(request);
-		Object obj = session.getAttribute("");
+		String token = request.getHeader("token");
+		if(token == null) {
+			return username;
+		}
+		Object obj = redisTemplate.opsForValue().get(token);
 		if(obj != null){
 			username = ((SysUser)obj).getUserName();
 		}
@@ -45,10 +68,12 @@ public class BaseService {
 	}
 	
 	public String getUserId(){
-		session = getSession(request);
-		Object obj = session.getAttribute("");
 		String userId = null;
-		//userId = "64365789BCA1ECF1E05013AC0688161E";
+		String token = request.getHeader("token");
+		if(token == null) {
+			return userId;
+		}
+		Object obj = redisTemplate.opsForValue().get(token);
 		if(obj != null){
 			userId = ((SysUser)obj).getId();
 		}
