@@ -54,6 +54,17 @@ public class BaseService {
 		redisTemplate.opsForValue().set(session.getId(), user);
 	}
 	
+	public void destroyedRedisUser() {
+		String username = this.getUserName();
+		if(redisTemplate.opsForValue().getOperations().hasKey(username)) {
+			String token = redisTemplate.opsForValue().get(username).toString();
+			boolean result = redisTemplate.delete(username);
+			System.out.println(result);
+			result = redisTemplate.delete(token);
+			System.out.println(result);
+		}
+	}
+	
 	public String getUserName(){
 		String username = "auto";
 		String token = request.getHeader("token");

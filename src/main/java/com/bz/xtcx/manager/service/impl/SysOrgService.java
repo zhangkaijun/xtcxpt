@@ -25,13 +25,29 @@ public class SysOrgService implements ISysOrgService {
 
 	@Override
 	public VoResponse saveOrUpdate(SysOrg org) {
+		VoResponse voRes = new VoResponse();
 		if(StringUtils.isEmpty(org.getId())) {//add
-			
-			
+			if(StringUtils.isEmpty(org.getParentId())) {
+				org.setOrgType(1);
+				org.setStatus(1);
+			}else {
+				SysOrg perOrg = sysOrgMapper.findById(org.getParentId());
+				if(perOrg == null) {
+					voRes.setFail(voRes);
+					return voRes;
+				}
+				if(perOrg.getOrgType() ==3) {
+					voRes.setFail(voRes);
+					return voRes;
+				}
+				org.setOrgType(perOrg.getOrgType() + 1);
+				org.setStatus(1);
+			}
+			sysOrgMapper.insert(org);
 		}else {//update
 			
 		}
-		return null;
+		return voRes;
 	}
 	
 	public static void main(String[] args) {

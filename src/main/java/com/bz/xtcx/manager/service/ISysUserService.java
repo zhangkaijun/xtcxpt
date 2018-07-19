@@ -25,6 +25,11 @@ public interface ISysUserService {
 	public VoResponse signIn(String username, String password);
 	
 	/**
+	 * 登出
+	 */
+	public void signOut();
+	
+	/**
 	 * 用户名或者邮箱查找用户信息
 	 * @param username
 	 * @return

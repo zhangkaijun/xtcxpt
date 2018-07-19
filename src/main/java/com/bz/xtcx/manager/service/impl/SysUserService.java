@@ -62,12 +62,19 @@ public class SysUserService extends BaseService implements ISysUserService {
 		voRes.setMessage("用户名或者密码错误");
 		return voRes;
 	}
+	
+	@Override
+	public void signOut() {
+		this.destroyedRedisUser();
+	}
 
 	@Override
 	public SysUser getUserByUsername(String username) {
 		SysUser user = sysUserMapper.findByUserameOrEmail(username);
 		return user;
 	}
+
+	
 	
 	
 

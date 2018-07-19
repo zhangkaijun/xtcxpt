@@ -36,25 +36,26 @@ public class SysManagerController extends BaseController{
 		return voRes;
 	}
 	
-	@GetMapping("org/getAll")
+	@GetMapping("org")
 	public Object getAllOrgs() {
-		VoResponse voRes = getVoResponse();
+		VoResponse voRes = new VoResponse();
+		voRes.setData(sysOrgService.getAll());
 		return voRes;
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("org")
 	public Object del(@RequestParam("id") String id) {
 		VoResponse voRes = getVoResponse();
 		return voRes;
 	}
 	
-	@PostMapping
+	@PostMapping("org")
 	public Object add(@RequestBody SysOrg org) {
-		VoResponse voRes = getVoResponse();
+		VoResponse voRes = sysOrgService.saveOrUpdate(org);
 		return voRes;
 	}
 	
-	@PutMapping
+	@PutMapping("org")
 	public Object update(@RequestBody SysOrg org) {
 		VoResponse voRes = getVoResponse();
 		return voRes;

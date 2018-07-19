@@ -2,12 +2,11 @@ package com.bz.xtcx.manager.controller;
 
 import java.util.UUID;
 
-import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +46,13 @@ public class LoginController extends BaseController{
 		}else {
 			
 		}
+		return voRes;
+	}
+	
+	@PostMapping("logout")
+	public Object logout(){
+		VoResponse voRes = new VoResponse();
+		sysUserService.signOut();
 		return voRes;
 	}
 

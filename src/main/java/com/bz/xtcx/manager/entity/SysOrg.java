@@ -7,7 +7,7 @@ import com.bz.xtcx.manager.comom.BasicEntity;
 public class SysOrg extends BasicEntity{
 
 	private String orgName;
-	private String orgType;//组织类别
+	private int orgType;//组织类别
 	private int sortOrder;
 	private String remark;
 	private String parentId;
@@ -18,12 +18,6 @@ public class SysOrg extends BasicEntity{
 	}
 	public void setOrgName(String orgName) {
 		this.orgName = orgName;
-	}
-	public String getOrgType() {
-		return orgType;
-	}
-	public void setOrgType(String orgType) {
-		this.orgType = orgType;
 	}
 	public int getSortOrder() {
 		return sortOrder;
@@ -48,6 +42,12 @@ public class SysOrg extends BasicEntity{
 	}
 	public void setOrgs(List<SysOrg> orgs) {
 		this.orgs = orgs;
+	}
+	public int getOrgType() {
+		return orgType;
+	}
+	public void setOrgType(int orgType) {
+		this.orgType = orgType;
 	}
 	
 	
